@@ -25,8 +25,18 @@ export default function RegistrarMovimiento() {
     async function loadCats() {
       try {
         const todas = await getAllCategorias();
-        setCategoriasIngreso(todas.filter(c => c.tipo === 'ingreso'));
-        setCategoriasGasto(todas.filter(c => c.tipo === 'gasto'));
+
+        // 🔥 CORRECCIÓN AQUÍ
+        setCategoriasIngreso(
+          todas.filter(c => c.tipo?.toUpperCase() === 'INCOME')
+        );
+
+        setCategoriasGasto(
+          todas.filter(c => c.tipo?.toUpperCase() === 'EXPENSE')
+        );
+
+      } catch (err) {
+        console.error("Error cargando categorías:", err);
       } finally {
         setCargandoCats(false);
       }
@@ -80,6 +90,7 @@ export default function RegistrarMovimiento() {
       }).then(() => {
         navigate('/dashboard');
       });
+
     } catch (err) {
       setError('Ocurrió un error inesperado al guardar el movimiento');
       console.error('Error en handleSubmit:', err);
@@ -92,7 +103,6 @@ export default function RegistrarMovimiento() {
 
   return (
     <div className="reg-mov-page">
-      {/* TOPBAR */}
       <div className="rm-topbar">
         <div>
           <div className="rm-page-title">Registrar movimiento</div>
@@ -105,7 +115,6 @@ export default function RegistrarMovimiento() {
         </div>
       </div>
 
-      {/* CONTENT */}
       <div className="rm-content">
 
         {success && (
@@ -127,7 +136,6 @@ export default function RegistrarMovimiento() {
         </div>
 
         <div className="rm-card">
-          {/* Card header */}
           <div className="rm-card-header">
             <div className="rm-card-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="#2952cc" strokeWidth="2">
@@ -147,10 +155,9 @@ export default function RegistrarMovimiento() {
             </div>
           </div>
 
-          {/* Form */}
           <form className="rm-form" onSubmit={handleSubmit}>
-            {/* Tipo toggle */}
             <div className="rm-section-label">Tipo de movimiento</div>
+
             <div className="rm-tipo-toggle">
               <button
                 type="button"
@@ -159,6 +166,7 @@ export default function RegistrarMovimiento() {
               >
                 + Ingreso
               </button>
+
               <button
                 type="button"
                 className={`rm-tipo-btn${!isIngreso ? ' active-gas' : ''}`}
@@ -184,12 +192,12 @@ export default function RegistrarMovimiento() {
                     name="monto"
                     value={form.monto}
                     onChange={handleChange}
-                    placeholder="0"
                     min="1"
                     required
                   />
                 </div>
               </div>
+
               <div className="rm-field">
                 <label>Fecha <span className="req">*</span></label>
                 <input
@@ -216,10 +224,13 @@ export default function RegistrarMovimiento() {
                 >
                   <option value="">Selecciona una categoría</option>
                   {categorias.map(c => (
-                    <option key={c.id} value={c.id}>{c.nombre}</option>
+                    <option key={c.id} value={c.id}>
+                      {c.nombre}
+                    </option>
                   ))}
                 </select>
               </div>
+
               <div className="rm-field">
                 <label>Descripción <span className="opt">(opcional)</span></label>
                 <input
@@ -228,26 +239,27 @@ export default function RegistrarMovimiento() {
                   name="descripcion"
                   value={form.descripcion}
                   onChange={handleChange}
-                  placeholder={isIngreso ? 'Ej: Pago quincena marzo' : 'Ej: Mercado semanal'}
                 />
               </div>
             </div>
 
-            {/* Footer */}
             <div className="rm-form-footer">
               <div className="rm-hint">
                 <div className="rm-hint-dot"></div>
                 El movimiento se reflejará inmediatamente en tu dashboard
               </div>
+
               <div className="rm-form-actions">
                 <button type="button" className="rm-btn-outline" onClick={handleLimpiar}>
                   Limpiar
                 </button>
+
                 <button type="submit" className="rm-btn-primary">
                   Guardar {tipo}
                 </button>
               </div>
             </div>
+
           </form>
         </div>
       </div>
