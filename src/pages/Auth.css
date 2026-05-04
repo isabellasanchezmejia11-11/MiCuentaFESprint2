@@ -1,0 +1,374 @@
+/* Auth.css — compartido entre Login y Registro */
+
+.auth-bg {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d2260 0%, #1a3a9f 40%, #2952cc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+.auth-bg::before {
+  content: '';
+  position: absolute;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  top: -100px; right: -60px;
+  pointer-events: none;
+}
+
+.auth-bg::after {
+  content: '';
+  position: absolute;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  bottom: -60px; left: 80px;
+  pointer-events: none;
+}
+
+/* CARD */
+.auth-card {
+  display: flex;
+  width: 860px;
+  max-width: 98vw;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* LEFT panel */
+.auth-left {
+  width: 360px;
+  flex-shrink: 0;
+  background: linear-gradient(160deg, #0f2875 0%, #1a3a9f 60%, #1e4db7 100%);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-left::before {
+  content: '';
+  position: absolute;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  bottom: -50px; right: -50px;
+  pointer-events: none;
+}
+
+.auth-left::after {
+  content: '';
+  position: absolute;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  top: 20px; right: 20px;
+  pointer-events: none;
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+  letter-spacing: -0.3px;
+}
+
+.brand-sub {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  margin-top: 3px;
+}
+
+.auth-hero {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-hero h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+}
+
+.auth-hero p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.auth-features {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.feature-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-icon svg {
+  width: 15px; height: 15px;
+  color: #fff;
+}
+
+.feature-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4f8ef7;
+  flex-shrink: 0;
+}
+
+.auth-feature span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.auth-left-footer {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.28);
+  position: relative;
+  z-index: 1;
+}
+
+/* RIGHT panel */
+.auth-right {
+  flex: 1;
+  background: #ffffff;
+  padding: 40px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0d2260;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+
+.form-subtitle {
+  font-size: 12.5px;
+  color: #4f8ef7;
+  margin-bottom: 24px;
+}
+
+/* Error banner */
+.auth-error {
+  background: #fff0f0;
+  border: 1px solid #ffc5c2;
+  border-radius: 8px;
+  padding: 9px 12px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+  color: #d93025;
+}
+
+/* Success banner */
+.auth-success {
+  background: #f0fff4;
+  border: 1px solid #a8e6c0;
+  border-radius: 8px;
+  padding: 9px 12px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+  color: #1a8a4a;
+}
+
+/* Fields */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #0d2260;
+}
+
+.req {
+  color: #4f8ef7;
+}
+
+.field input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border: 1.5px solid #d1daf0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #0d2260;
+  outline: none;
+  background: #f8fafd;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.field input:focus {
+  border-color: #2952cc;
+  background: #fff;
+}
+
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap input {
+  padding-right: 44px;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+/* Two-column row for Registro */
+.reg-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Password strength */
+.pass-strength {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.pass-bar {
+  height: 3px;
+  border-radius: 2px;
+  flex: 1;
+  background: #e2eaf4;
+}
+
+.pass-bar.active {
+  background: #2952cc;
+}
+
+.pass-label {
+  font-size: 10px;
+  color: #2952cc;
+  margin-top: 4px;
+}
+
+.hint-ok {
+  font-size: 11px;
+  color: #1a8a4a;
+  margin-top: 3px;
+}
+
+.hint-error {
+  font-size: 11px;
+  color: #d93025;
+  margin-top: 3px;
+}
+
+/* Submit button */
+.btn-primary {
+  width: 100%;
+  height: 48px;
+  background: #2952cc;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #1a3a9f;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Divider */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e7f5;
+}
+
+.auth-divider span {
+  font-size: 11.5px;
+  color: #a0adc8;
+}
+
+/* Register / Login link */
+.register-link {
+  text-align: center;
+  font-size: 13px;
+  color: #4a5578;
+  margin-bottom: 16px;
+}
+
+.register-link a {
+  color: #2952cc;
+  font-weight: 600;
+}
+
+/* Secure note */
+.secure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 11.5px;
+  color: #8096c2;
+}
