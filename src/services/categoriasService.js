@@ -59,15 +59,51 @@ function normalizeCategoryToApi(categoria) {
  */
 export async function getAllCategorias() {
   try {
+    console.log('📥 Iniciando carga de categorías...');
+    
     const [ingresos, gastos] = await Promise.all([
       authFetch('/categories?type=INCOME'),
       authFetch('/categories?type=EXPENSE'),
     ]);
 
+    console.log('📥 Respuesta INCOME:', ingresos);
+    console.log('📥 Respuesta EXPENSE:', gastos);
+
+    // Normalizar respuestas - pueden venir como array o dentro de un wrapper
+    const ingresosArray = Array.isArray(ingresos) 
+      ? ingresos 
+      : Array.isArray(ingresos?.items)
+        ? ingresos.items
+        : Array.isArray(ingresos?.data)
+          ? ingresos.data
+          : [];
+          
+    const gastosArray = Array.isArray(gastos)
+      ? gastos
+      : Array.isArray(gastos?.items)
+        ? gastos.items
+        : Array.isArray(gastos?.data)
+          ? gastos.data
+          : [];
+
+    console.log('📥 Ingresos procesados:', ingresosArray);
+    console.log('📥 Gastos procesados:', gastosArray);
+
+    // Validar que sean arrays antes de mapear
+    if (!Array.isArray(ingresosArray) || !Array.isArray(gastosArray)) {
+      console.error('❌ Las respuestas no son arrays:', {
+        ingresos: ingresosArray,
+        gastos: gastosArray
+      });
+      return [];
+    }
+
     const allCategories = [
-      ...ingresos.map(normalizeCategoryFromApi),
-      ...gastos.map(normalizeCategoryFromApi),
+      ...ingresosArray.map(normalizeCategoryFromApi),
+      ...gastosArray.map(normalizeCategoryFromApi),
     ];
+
+    console.log('📥 Categorías normalizadas:', allCategories);
 
     // Deduplicate by id to prevent duplicate records
     const uniqueMap = new Map();
@@ -76,8 +112,13 @@ export async function getAllCategorias() {
         uniqueMap.set(cat.id, cat);
       }
     });
-    return Array.from(uniqueMap.values());
+    
+    const result = Array.from(uniqueMap.values());
+    console.log('✅ Total categorías cargadas:', result.length);
+    return result;
   } catch (error) {
+    console.error('❌ Error fetching categorías:', error);
+    console.error('Stack:', error.stack);
     return [];
   }
 }

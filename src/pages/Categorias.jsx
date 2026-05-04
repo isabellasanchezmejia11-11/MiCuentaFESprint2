@@ -19,6 +19,7 @@ export default function Categorias() {
         const cats = await getAllCategorias();
         setCategorias(cats);
       } catch (error) {
+        console.error('Error cargando categorías:', error);
         // Error handling: user will see empty state
       } finally {
         setCargando(false);
@@ -33,6 +34,7 @@ export default function Categorias() {
       const cats = await getAllCategorias();
       setCategorias(cats);
     } catch (error) {
+      console.error('Error recargando categorías:', error);
       // Error handling: user will see previous state
     }
   }

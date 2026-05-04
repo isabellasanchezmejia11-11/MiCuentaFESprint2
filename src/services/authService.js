@@ -162,6 +162,12 @@ export async function restoreSession() {
 export async function authFetch(path, options = {}) {
   const token = getToken();
 
+  if (!token) {
+    console.warn('⚠️ No hay token disponible para', path);
+  } else {
+    console.log('✓ Token presente para', path);
+  }
+
   const headers = {
     'Content-Type': 'application/json',
     ...(options.headers || {}),
@@ -171,11 +177,22 @@ export async function authFetch(path, options = {}) {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(buildUrl(path), {
-    ...options,
-    headers,
-  });
+  const url = buildUrl(path);
+  console.log('📡 Llamada a:', url, { hasToken: !!token });
 
-  const data = await parseResponse(response);
-  return data;
+  try {
+    const response = await fetch(url, {
+      ...options,
+      headers,
+    });
+
+    console.log('📡 Status:', response.status, 'para', path);
+
+    const data = await parseResponse(response);
+    console.log('📡 Datos recibidos:', data);
+    return data;
+  } catch (error) {
+    console.error('❌ Error en authFetch:', path, error);
+    throw error;
+  }
 }
