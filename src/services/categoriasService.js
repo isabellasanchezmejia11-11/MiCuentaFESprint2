@@ -62,8 +62,8 @@ export async function getAllCategorias() {
     console.log('📥 Iniciando carga de categorías...');
     
     const [ingresos, gastos] = await Promise.all([
-      authFetch('/categories?type=INCOME'),
-      authFetch('/categories?type=EXPENSE'),
+      authFetch('/categories?type=INCOME', { method: 'GET' }),
+      authFetch('/categories?type=EXPENSE', { method: 'GET' }),
     ]);
 
     console.log('📥 Respuesta INCOME:', ingresos);
