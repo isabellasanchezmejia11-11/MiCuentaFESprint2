@@ -25,14 +25,15 @@ export default function RegistrarMovimiento() {
     async function loadCats() {
       try {
         const todas = await getAllCategorias();
+        console.log('📥 Categorías cargadas:', todas);
 
         // 🔥 CORRECCIÓN AQUÍ
         setCategoriasIngreso(
-          todas.filter(c => c.tipo?.toUpperCase() === 'INCOME')
+          todas.filter(c => c.tipo?.toUpperCase() === 'INGRESO')
         );
 
         setCategoriasGasto(
-          todas.filter(c => c.tipo?.toUpperCase() === 'EXPENSE')
+          todas.filter(c => c.tipo?.toUpperCase() === 'GASTO')
         );
 
       } catch (err) {
@@ -45,6 +46,9 @@ export default function RegistrarMovimiento() {
   }, []);
 
   const categorias = tipo === 'ingreso' ? categoriasIngreso : categoriasGasto;
+  console.log('📥 Categorías ingreso:', categoriasIngreso);
+  console.log('📥 Categorías gasto:', categoriasGasto);
+
 
   function handleTipo(t) {
     setTipo(t);
