@@ -8,6 +8,7 @@ import {
   formatCOP,
 } from '../services/movimientosService';
 import { getAllCategorias } from '../services/categoriasService';
+import FinancialAdvisorChat from '../components/FinancialAdvisorChat';
 import './Dashboard.css';
 
 function formatFecha(fechaStr) {
@@ -388,6 +389,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      <FinancialAdvisorChat />
     </div>
   );
 }
